@@ -23,10 +23,7 @@ class _TfliteModelState extends State<TfliteModel> {
     loadModel();
   }
 
-  final _name = [
-    {'name': 'Macrotrabecular', 'per': 0.95},
-    {'name': 'Microtrabecular', 'per': 0.05}
-  ];
+ 
 
   Future loadModel() async {
     Tflite.close();
@@ -81,14 +78,14 @@ class _TfliteModelState extends State<TfliteModel> {
           SingleChildScrollView(
             child: Column(
               children: (imageSelect)
-                  ? _name.map((result) {
+                  ? _results.map((result) {
                       return Card(
                         child: Container(
                           margin: const EdgeInsets.all(10),
                           width: MediaQuery.of(context).size.width,
                           child: Center(
                             child: Text(
-                              "${result['name']} - ${result['per']}",
+                              "${result['label']} - ${result['confidence'].toStringAsFixed(2)}",
                               style: const TextStyle(
                                   color: Colors.purple, fontSize: 20),
                             ),
@@ -130,11 +127,7 @@ class _TfliteModelState extends State<TfliteModel> {
           setState(() {});
         },
       ),
-      // FloatingActionButton(
-      //   onPressed: pickGalImage,
-      //   tooltip: "Pick Image",
-      //   child: const Icon(Icons.image),
-      // ),
+      
     );
   }
 
